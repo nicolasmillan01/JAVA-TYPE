@@ -99,3 +99,135 @@ function mostrarDato(dato: string | number): void {
 mostrarDato("typescript");
 mostrarDato(3.14159);
 console.log("\n");
+
+
+/**
+ * EJERCICIO 6 - Enums
+ */
+console.log("--- EJERCICIO 6 ---");
+enum EstadoPedido {
+    Pendiente = "Pendiente",
+    EnProceso = "En Proceso",
+    Enviado = "Enviado",
+    Entregado = "Entregado"
+}
+
+let miPedido: EstadoPedido = EstadoPedido.Enviado;
+console.log("Estado de mi pedido:", miPedido);
+console.log("\n");
+
+/**
+ * ==========================================================
+ */
+
+/**
+ * EJERCICIO 7 - Clases
+ */
+console.log("--- EJERCICIO 7 ---");
+class Vehiculo {
+    marca: string;
+    modelo: string;
+
+    constructor(marca: string, modelo: string) {
+        this.marca = marca;
+        this.modelo = modelo;
+    }
+
+    mostrarInformacion(): void {
+        console.log(`Vehículo: ${this.marca} - Modelo: ${this.modelo}`);
+    }
+}
+
+const auto1 = new Vehiculo("Toyota", "Corolla");
+const auto2 = new Vehiculo("Ford", "Fiesta");
+
+auto1.mostrarInformacion();
+auto2.mostrarInformacion();
+console.log("\n");
+
+/**
+ * EJERCICIO 8 - Herencia
+ */
+console.log("--- EJERCICIO 8 ---");
+class Persona {
+    nombre: string;
+    edad: number;
+
+    constructor(nombre: string, edad: number) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+}
+
+class Estudiante extends Persona {
+    carrera: string;
+
+    constructor(nombre: string, edad: number, carrera: string) {
+        super(nombre, edad); // super() llama al constructor de la clase padre
+        this.carrera = carrera;
+    }
+
+    mostrarInfoCompleta(): void {
+        console.log(`Estudiante: ${this.nombre}, Edad: ${this.edad}, Carrera: ${this.carrera}`);
+    }
+}
+
+const estudiante1 = new Estudiante("Laura", 21, "Ingeniería de Software");
+estudiante1.mostrarInfoCompleta();
+console.log("\n");
+
+/**
+ * EJERCICIO 9 - Generics
+ */
+console.log("--- EJERCICIO 9 ---");
+function obtenerPrimero<T>(arreglo: T[]): T | undefined {
+    return arreglo[0];
+}
+
+console.log("Primer número:", obtenerPrimero([100, 200, 300]));
+console.log("Primer string:", obtenerPrimero(["A", "B", "C"]));
+console.log("Primer booleano:", obtenerPrimero([true, false]));
+console.log("\n");
+
+/**
+ * EJERCICIO 10 - Sistema de Usuarios
+ */
+console.log("--- EJERCICIO 10 ---");
+// 1. Crear Type
+type Usuario = {
+    id: number;
+    nombre: string;
+    edad: number;
+    activo: boolean;
+};
+
+// 2. Arreglo tipado
+const usuarios: Usuario[] = [];
+
+// 3. Función agregar
+function agregarUsuario(usuario: Usuario): void {
+    usuarios.push(usuario);
+}
+
+// 4. Función buscar por ID
+function buscarUsuario(id: number): Usuario | undefined {
+    return usuarios.find(u => u.id === id);
+}
+
+// 5. Función filtrar activos
+function obtenerUsuariosActivos(): Usuario[] {
+    return usuarios.filter(u => u.activo);
+}
+
+// Pruebas del sistema
+agregarUsuario({ id: 1, nombre: "Carlos", edad: 30, activo: true });
+agregarUsuario({ id: 2, nombre: "María", edad: 25, activo: false });
+agregarUsuario({ id: 3, nombre: "Pedro", edad: 28, activo: true });
+
+console.log("Usuario encontrado (ID 2):", buscarUsuario(2));
+console.log("Usuarios activos:", obtenerUsuariosActivos());
+
+// 6. Mostrar el arreglo final
+console.log("Arreglo final de usuarios:", usuarios);
+
+export {};
